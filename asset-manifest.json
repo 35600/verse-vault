@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/verse-vault/static/css/main.b5bc3596.css",
+    "main.js": "/verse-vault/static/js/main.651c723b.js",
+    "index.html": "/verse-vault/index.html",
+    "main.b5bc3596.css.map": "/verse-vault/static/css/main.b5bc3596.css.map",
+    "main.651c723b.js.map": "/verse-vault/static/js/main.651c723b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b5bc3596.css",
+    "static/js/main.651c723b.js"
+  ]
+}
