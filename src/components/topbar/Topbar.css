@@ -1,0 +1,126 @@
+.top{
+  background-color: #fff;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  display:flex;
+  align-items: center;
+  font-family: 'josefin Sans', sans-serif;
+  position: sticky;
+  z-index: 1000;
+}
+.topLeft,.topRight{
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topicon{
+font-size: 20px;
+margin-right: 10px;
+color: #444;
+cursor: pointer;
+}
+.topimg{
+width: 40px;
+height: 40px;
+border-radius: 50%;
+object-fit:cover ;
+ border: 2px solid #ccc;     /* Optional: adds a subtle border */
+  margin-right: 10px;         /* Space from adjacent elements */
+  cursor: pointer;            /* Optional: shows it's clickable */
+  display: inline-block;
+  color: #555;                /* Applies to Font Awesome icon */
+  font-size: 24px;            /* Applies to Font Awesome icon */
+  text-align: center;         /* Centers icon if used */
+  line-height: 40px; 
+}
+
+.topCenter{
+  flex: 6;
+}
+.topList{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.topListItem{
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.link{
+  text-decoration: none;
+  color: inherit;
+}
+.topSearchIcon{
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  margin-left:15px ;
+}
+ .menuOpenIcon {
+    display: none;
+ 
+  }
+  .menuCloseIcon{
+    display: none;
+  }
+ 
+
+@media screen and (max-width: 768px) {
+ .topCenter {
+    position: relative;
+  }
+
+  .topList {
+    flex-direction: column;
+    background:  linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    position: fixed;
+    top: 0;
+    right: -200px;
+    width: 200px;
+    height: 100vh;
+    padding-top: 50px;
+  z-index: 9999;
+    align-items: flex-start;
+    transition: right 0.3s ease-in-out;
+ backdrop-filter: blur(8px);
+ -webkit-backdrop-filter: blur(8px);
+  }
+
+  .topList.open {
+    right: 0;
+  }
+
+  .topListItem {
+    display: block;
+    margin: 25px;
+    color: #fff;
+     font-weight:px;
+
+  }
+
+  .menuOpenIcon {
+    display: block;
+    font-size: 24px;
+    margin-left: 15px;
+  }
+ .menuCloseIcon{
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+ }
+ .topimg {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+
