@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/verse-vault/static/css/main.496eb456.css",
-    "main.js": "/verse-vault/static/js/main.1f56f0da.js",
+    "main.css": "/verse-vault/static/css/main.82612677.css",
+    "main.js": "/verse-vault/static/js/main.f01442eb.js",
     "index.html": "/verse-vault/index.html",
-    "main.496eb456.css.map": "/verse-vault/static/css/main.496eb456.css.map",
-    "main.1f56f0da.js.map": "/verse-vault/static/js/main.1f56f0da.js.map"
+    "main.82612677.css.map": "/verse-vault/static/css/main.82612677.css.map",
+    "main.f01442eb.js.map": "/verse-vault/static/js/main.f01442eb.js.map"
   },
   "entrypoints": [
-    "static/css/main.496eb456.css",
-    "static/js/main.1f56f0da.js"
+    "static/css/main.82612677.css",
+    "static/js/main.f01442eb.js"
   ]
 }
