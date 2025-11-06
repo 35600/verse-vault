@@ -10,27 +10,31 @@ export default function Topbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+    const fetchUserProfile = async () => {
+      const {
+        data: { user },
+        error: authError,
+      } = await supabase.auth.getUser();
+
+      if (authError || !user) return;
 
       setUser(user);
 
-      const { data, error } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("avatar_url")
         .eq("id", user.id)
         .single();
 
-      if (!error && data?.avatar_url) {
-        setAvatarUrl(data.avatar_url);
+      if (profileError) {
+        console.warn("Profile fetch error:", profileError.message);
+      } else if (profile?.avatar_url) {
+        setAvatarUrl(profile.avatar_url);
       }
     };
 
-    fetchUser();
+    fetchUserProfile();
   }, []);
-
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -38,14 +42,15 @@ export default function Topbar() {
     navigate("/login");
   };
 
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+
   return (
     <div className="top">
       {/* Left: Social Icons */}
       <div className="topLeft">
-        <i className="topicon fa fa-facebook"></i>
-        <i className="topicon fa fa-pinterest"></i>
-        <i className="topicon fa fa-twitter"></i>
-        <i className="topicon fa fa-instagram"></i>
+        {["facebook", "pinterest", "twitter", "instagram"].map((platform) => (
+          <i key={platform} className={`topicon fa fa-${platform}`} />
+        ))}
       </div>
 
       {/* Center: Navigation Links */}
@@ -74,9 +79,9 @@ export default function Topbar() {
       <div className="topRight">
         {user ? (
           avatarUrl ? (
-            <img className="topimg" src={avatarUrl} alt="User profile" />
+            <img className="topimg" src={avatarUrl} alt="User avatar" />
           ) : (
-            <i className="fa fa-user topimg" aria-hidden="true"></i>
+            <i className="fa fa-user topimg" aria-hidden="true" />
           )
         ) : (
           <ul className="topList">

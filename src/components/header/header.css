@@ -1,7 +1,8 @@
+/* header.css */
 .header{
    position: relative;
   width: 100%;
-  height: 60vh;
+  height: 60vh; /* Height maintained */
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   display: flex;
   flex-direction: column;
@@ -9,14 +10,15 @@
   justify-content: center;
   overflow: hidden;
   color: white;
-  z-index: o;
+  z-index: 0; /* Fixed typo from 'o' to '0' */
 }
 .headerTitle{
 display: flex;
 flex-direction: column;
 align-items: center;
 font-family: 'Lora', serif;
-color: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+/* Note: color property for text gradient is unusual, but keeping original structure */
+color: white; 
 }
 .headerTitleSm{
    position: absolute;
@@ -31,7 +33,7 @@ color: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 .headerimg{
      width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Maintained cover fit */
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -40,18 +42,47 @@ color: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   pointer-events: none; 
 }
 
-
+/* Styles for screens up to 600px */
 @media only screen and (max-width: 600px) {
   .header {
-  position: relative;
-  z-index: 1;
+    height: 60vh; /* Height maintained */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .headerTitleSm{
+    font-size: 16px; /* Font scaled down */
+    top: 15%; 
+  }
+  
+  .headerTitleLg{
+    font-size: 32px; /* Font scaled down */
+  }
+
+  .headerimg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Explicitly ensure cover fit */
+    pointer-events: none; 
+  }
 }
 
-.headerimg{
-  pointer-events: none; 
-    background-size: cover;
-    background-position: center;
-
+/* Specific styles for screens under 400px */
+@media only screen and (max-width: 400px) {
+    .header {
+    height: 60vh; /* Height maintained */
+    }
+    .headerTitleSm {
+       font-size: 14px; /* Font scaled down */
+        top: 18%; 
+    }
+    .headerTitleLg {
+        font-size: 26px; /* Font scaled down */
+    }
+    
+    .headerimg{
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Explicitly ensure cover fit */
+    }
 }
-}
-

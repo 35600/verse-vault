@@ -4,19 +4,24 @@ import { supabase } from "../../supabaseClient";
 import "./register.css";
 
 export default function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
 
+    const { username, email, password } = formData;
+
     if (!username || !email || !password) {
-      setMessage("Please fill in all fields.");
+      setMessage("⚠️ Please fill in all fields.");
       return;
     }
 
@@ -26,15 +31,15 @@ export default function Register() {
     try {
       const { error: signUpError } = await supabase.auth.signUp({ email, password });
       if (signUpError) {
-        setMessage(`Signup error: ${signUpError.message}`);
+        setMessage(`❌ Signup error: ${signUpError.message}`);
         return;
       }
 
-      const { data: userData, error: userError } = await supabase.auth.getUser();
-      const userId = userData?.user?.id;
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      const userId = session?.user?.id;
 
-      if (userError || !userId) {
-        setMessage("Unable to retrieve user session. Please log in again.");
+      if (sessionError || !userId) {
+        setMessage("⚠️ Unable to retrieve user session. Please log in again.");
         return;
       }
 
@@ -43,13 +48,13 @@ export default function Register() {
       ]);
 
       if (profileError) {
-        setMessage(`Profile creation error: ${profileError.message}`);
+        setMessage(`❌ Profile creation error: ${profileError.message}`);
       } else {
-        setMessage("Registration successful! Redirecting to login...");
+        setMessage("✅ Registration successful! Redirecting to login...");
         setTimeout(() => navigate("/login"), 2000);
       }
-    } catch {
-      setMessage("Unexpected error occurred. Please try again.");
+    } catch (err) {
+      setMessage("❌ Unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -62,27 +67,30 @@ export default function Register() {
         <label>Username</label>
         <input
           type="text"
+          name="username"
           className="registerInput"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={formData.username}
+          onChange={handleChange}
           required
         />
 
         <label>Email</label>
         <input
           type="email"
+          name="email"
           className="registerInput"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={handleChange}
           required
         />
 
         <label>Password</label>
         <input
           type="password"
+          name="password"
           className="registerInput"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
           required
         />
 
@@ -91,7 +99,7 @@ export default function Register() {
         </button>
       </form>
 
-      <p className="registerMessage">{message}</p>
+      {message && <p className="registerMessage">{message}</p>}
 
       <button className="registerLoginButton">
         <Link className="link" to="/login">Login</Link>

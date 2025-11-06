@@ -31,8 +31,24 @@ export default function Settings() {
         .single();
 
       if (profileError) {
-        console.error("Profile fetch error:", profileError.message);
-        setMessage("No profile found.");
+        console.warn("Profile fetch error:", profileError.message);
+        setMessage("No profile found. Creating one...");
+
+        const { error: insertError } = await supabase.from("profiles").insert([
+          {
+            id: user.id,
+            username: "", // default empty username
+            created_at: new Date().toISOString(),
+          },
+        ]);
+
+        if (insertError) {
+          console.error("Profile insert error:", insertError.message);
+          setMessage("Failed to create profile.");
+          return;
+        }
+
+        setMessage("Profile created. You can now update it.");
         return;
       }
 
@@ -55,8 +71,7 @@ export default function Settings() {
 
     const { error: profileError } = await supabase
       .from("profiles")
-      .update(updates)
-      .eq("id", user.id);
+      .upsert({ id: user.id, ...updates });
 
     if (profileError) {
       setMessage("Failed to update profile.");

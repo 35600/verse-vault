@@ -19,32 +19,33 @@ import Single from "./pages/single/Single";
 const AppWrapper = () => {
   const location = useLocation();
   const [user, setUser] = useState(null);
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      console.log("🔐 Supabase user fetched:", user);
-      setUser(user);
-      setCheckingAuth(false);
-    };
-
-    fetchUser();
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("🔄 Auth state changed:", session);
+    const initializeAuth = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setUser(session?.user || null);
-    });
+      setLoading(false);
 
-    return () => {
-      listener?.subscription?.unsubscribe();
+      const { data: listener } = supabase.auth.onAuthStateChange(
+        (_event, session) => {
+          setUser(session?.user || null);
+        }
+      );
+
+      return () => {
+        listener?.subscription?.unsubscribe();
+      };
     };
+
+    initializeAuth();
   }, []);
 
   const hideTopBar = ["/login", "/register"].includes(location.pathname);
 
-  if (checkingAuth) {
-    console.log("⏳ Checking auth...");
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -55,11 +56,11 @@ const AppWrapper = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/register"
-          element={user ? <Navigate to="/" /> : <Register />}
+          element={!user ? <Register /> : <Navigate to="/" />}
         />
         <Route
           path="/login"
-          element={user ? <Navigate to="/" /> : <Login />}
+          element={!user ? <Login /> : <Navigate to="/" />}
         />
         <Route
           path="/settings"

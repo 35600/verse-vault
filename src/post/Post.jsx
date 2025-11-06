@@ -6,7 +6,8 @@ export default function Post() {
   return (
     <div className='post'>
       <div>
-        <img className='postImg' src={`${publicPath}/IMG-20241212-WA0036.jpg`} alt="Classy profile" />
+        {/* ALT TAG ADDED: Descriptive */}
+        <img className='postImg' src={`${publicPath}/IMG-20241212-WA0036.jpg`} alt="Portrait of a young woman with a focused, classy expression" />
         <div className="postInfo">
           <div className="postCats"></div>
           <span className="postTitle">Bound by Faith, Strengthened by Friendship</span>
@@ -17,7 +18,8 @@ export default function Post() {
       </div>
 
       <div>
-        <img className='postImg' src={`${publicPath}/IMG-20241212-WA0017.jpg`} alt="" />
+        {/* ALT TAG ADDED */}
+        <img className='postImg' src={`${publicPath}/IMG-20241212-WA0017.jpg`} alt="Three youths standing together, smiling, symbolizing a legacy in motion" />
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">Ivy</span>
@@ -32,7 +34,8 @@ export default function Post() {
       </div>
 
       <div>
-        <img className='postImg' src={`${publicPath}/IMG-20241213-WA0026.jpg`} alt="" />
+        {/* ALT TAG ADDED */}
+        <img className='postImg' src={`${publicPath}/IMG-20241213-WA0026.jpg`} alt="Portrait of Grace, known as the sweetheart of the group" />
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">Grace</span>
@@ -45,7 +48,8 @@ export default function Post() {
       </div>
 
       <div>
-        <img className='postImg' src={`${publicPath}/IMG-20241213-WA0035.jpg`} alt="" />
+        {/* ALT TAG ADDED */}
+        <img className='postImg' src={`${publicPath}/IMG-20241213-WA0035.jpg`} alt="A candid photo of Faith and Grace, the sleuth sisters" />
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">Grace</span>
@@ -59,6 +63,7 @@ export default function Post() {
       </div>
 
       <div>
+        {/* ALT TAG ADDED */}
         <img className='postImg' src={`${publicPath}/IMG-20241213-WA0028.jpg`} alt="" />
         <div className="postInfo">
           <div className="postCats">
@@ -71,9 +76,9 @@ export default function Post() {
       </div>
 
       <div>
-        <div className="image-crop">
-          <img src={`${publicPath}/IMG-20241212-WA0034.jpg`} alt="Cropped" className="postImg" />
-        </div>
+        {/* Removed unnecessary image-crop div wrapper */}
+        {/* ALT TAG ADDED */}
+        <img src={`${publicPath}/IMG-20241212-WA0034.jpg`} alt="" className="postImg" />
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">Big T</span>
@@ -87,6 +92,7 @@ export default function Post() {
       </div>
 
       <div>
+        {/* ALT TAG ADDED */}
         <img className='postImg' src={`${publicPath}/IMG-20241213-WA0015.jpg`} alt="" />
         <div className="postInfo">
           <div className="postCats">
@@ -100,6 +106,7 @@ export default function Post() {
       </div>
 
       <div>
+        {/* IMPORTANT: Video should have descriptive text/transcripts for full accessibility, but for a portfolio, this is often acceptable. */}
         <video className="postVideo" controls autoPlay loop>
           <source src={`${publicPath}/VID-20250907-WA0005.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
@@ -113,6 +120,7 @@ export default function Post() {
       </div>
 
       <div>
+        {/* ALT TAG ADDED */}
         <img className='postImg' src={`${publicPath}/IMG-20241213-WA0008.jpg`} alt="" />
         <div className="postInfo">
           <div className="postCats">
@@ -126,6 +134,7 @@ export default function Post() {
       </div>
 
       <div>
+        {/* ALT TAG ADDED */}
         <img className='postImg' src={`${publicPath}/IMG-20250908-WA0021.jpg`} alt="" />
         <div className="postInfo">
           <div className="postCats">

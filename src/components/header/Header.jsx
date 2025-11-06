@@ -8,7 +8,7 @@ export default function Header() {
         <span className="headerTitleSm">Kindred Spirits,</span>
         <span className="headerTitleLg"> Timeless Bonds</span>
     </div>
-     <img className='headerimg' src={`${publicPath}/IMG-20241212-WA0036.jpg`} alt="" />
+     <img className='headerimg' src={`${publicPath}/IMG-20241212-WA0036.jpg`} alt="Inspirational group photo of kindred spirits" />
     </div>
   )
 }

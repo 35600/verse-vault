@@ -1,3 +1,5 @@
+/* post.css */
+
 .post{
 display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5,26 +7,35 @@ display: grid;
   padding: 20px;
   box-sizing: border-box;
 }
-.image-crop{
+
+/* Base styles for post images/videos with Skeleton Loading properties */
+.postImg, 
+.postVideo {
   width: 100%;
-  height: auto;
-  clip-path: inset(0 25% 0 0); /* top, right, bottom, left */
-}
-.postImg {
-  width: 100%;
-  height: 300px; /* Set a fixed height */
+  height: 300px; /* Maintained fixed height */
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* --- SKELETON LOADING IMPLEMENTATION --- */
+  background-color: #f6f7f8; 
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
 }
 
-.postVideo {
- width: 100%;
-  height: 300px; /* Set a fixed height */
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+/* The .image-crop class is unnecessary if you use object-fit: cover */
+/* .image-crop{
+  width: 100%;
+  height: auto;
+  clip-path: inset(0 25% 0 0); 
+} */
+
 .postInfo{
     display: flex;
    flex-direction: column;
@@ -35,10 +46,10 @@ display: grid;
     font-size: 14px;
     color: #be9656;
     cursor: pointer;
-margin-right: 10px;
-margin-top: 15px;
-line-height: 20px;
-font-family: "Varela Round", sans-serif;
+    margin-right: 10px;
+    margin-top: 15px;
+    line-height: 20px;
+    font-family: "Varela Round", sans-serif;
 }
 
 .postTitle{
@@ -65,12 +76,46 @@ font-family: "Varela Round", sans-serif;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-clamp: 3;
+  /* Use -webkit-line-clamp for cross-browser support */
   -webkit-line-clamp: 3;
     font-family: "Varela Round",sans-serif;
 }
+
+/* Responsive Styles */
+
+/* General mobile/tablet adjustment */
 @media (max-width: 768px) {
-  .postImg {
+  /* Maintain 300px image height here if 2-column grid still looks good */
+  .postImg,
+  .postVideo {
+    height: 300px;
+  }
+}
+
+/* CRITICAL: Grid collapse for small phones (below 400px) */
+@media (max-width: 400px) {
+  .post {
+    /* Collapse to a single column */
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 20px;
+  }
+  .postImg,
+  .postVideo {
+    /* Slightly reduce image height for the smallest screens */
     height: 200px;
+  }
+  .postTitle {
+    font-size: 20px;
+  }
+}
+
+/* KEYFRAMES FOR SHIMMER EFFECT */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
   }
 }
